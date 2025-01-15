@@ -77,3 +77,31 @@ Create your first JPA entity
 Easily start your REST Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+## Running MongoDB in a Docker Container
+
+To start a MongoDB instance for this application using Docker, you can run the following command:
+
+```shell
+docker run -d \
+  --name user-microservice \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=password \
+  -v /home/luis/mongoDB:/data/db \
+  mongo
+```
+
+This command:
+
+- Downloads and runs the MongoDB Docker image if it's not already available locally.
+- Starts the container in detached mode (`-d`).
+- Names the container `user-microservice` for easy identification.
+- Exposes port `27017` on the host machine, mapped to `27017` inside the container.
+- Sets up the root user credentials (`MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD`).
+- Mounts the host directory `/home/luis/mongoDB` to the container directory `/data/db` for persistent data storage.
+
+Ensure that the directory `/home/luis/mongoDB` exists and has the appropriate permissions for the Docker process to
+write to it.
+
+For more details on MongoDB with Docker, visit the [MongoDB Docker documentation](https://hub.docker.com/_/mongo).
